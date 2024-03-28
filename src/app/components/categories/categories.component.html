@@ -1,0 +1,13 @@
+<!-- all categories -->
+<section class="pt-2">
+    <h2>All Categories</h2>
+    <div class="row mt-4 g-4">
+        <div class="col-md-2" *ngFor="let categories of category" [title]=" categories.name">
+            <div class=" product p-2 small" hight="50">
+                <img [src]="categories.image" [alt]="categories.name" [title]="categories.name"
+                    class="w-100 cursor-pointer" height="200" />
+            </div>
+            <h3 class=" text-main text-center h6 mt-3">{{categories.name}}</h3>
+        </div>
+    </div>
+</section>

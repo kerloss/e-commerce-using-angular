@@ -1,0 +1,35 @@
+<section>
+    <h1 class="text-main">All Orders</h1>
+    <div class="row mt-5 border border-main d-flex justify-content-center" *ngFor="let orders of allOrders">
+        <div class="text-main d-flex justify-content-between border-bottom border-main">
+            <h4>Order ID: {{orders.id}}</h4>
+            <h4>Total Order Price: {{orders.totalOrderPrice | currency:'EGP '}}</h4>
+        </div>
+        <div class="d-flex justify-content-center">
+            <div class="col-md-4 my-2">
+                <owl-carousel-o [options]="allOrdersSliderOptions">
+                    <ng-container *ngFor="let cartItem of orders.cartItems">
+                        <ng-template carouselSlide>
+                            <div class="text-center">
+                                <img [src]="cartItem.product.imageCover" [alt]="cartItem.product.title"
+                                    [title]="cartItem.product.title" class="w-100" height="400">
+                            </div>
+                        </ng-template>
+                    </ng-container>
+                </owl-carousel-o>
+            </div>
+        </div>
+        <div class="col-md-8 d-flex justify-content-between text-center w-100">
+            <div class="mt-5 mx-1 w-100 border border-main mb-3" *ngFor="let cartItem of orders.cartItems">
+                <h3 class="h5">{{cartItem.product.title}}</h3><br />
+                <p class="h6">Number of Pices: <span class="text-main">{{cartItem.count}}</span></p>
+                <p class="h6">Price of product: <span class="text-main">{{cartItem.price | currency:'EGP '}}</span></p>
+                <p class="h6" *ngIf="cartItem.count>1">Total Price of product:
+                    <span class="text-main">{{cartItem.price*cartItem.count|currency:'EGP '}}</span>
+                </p>
+                <h4 class="h6">Brand: <span class="text-main">{{cartItem.product.brand.name}}</span></h4>
+                <h4 class="h6">Payment Method: <span class="text-main">{{orders.paymentMethodType}}</span></h4>
+            </div>
+        </div>
+    </div>
+</section>

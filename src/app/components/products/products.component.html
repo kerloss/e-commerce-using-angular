@@ -1,0 +1,46 @@
+<!-- all Products -->
+<section class="pt-2">
+    <h2>All Products</h2>
+    <input type="search" name="search" class="form-control w-25 me-auto" placeholder="Search Title..."
+        [(ngModel)]="searchText">
+    <!-- <div>
+        <select class="form-select" aria-label="Default select example" [(ngModel)]="sortOptions" (click)="sortProduct(sortOptions)">
+            <option selected>Sort By...</option>
+            <option value="+price">+price</option>
+            <option value="-price">-price</option>
+            <option value="brand">brand</option>
+            <option value="category">category</option>
+            <option value="+ratingsAverage">+rating</option>
+            <option value="-ratingsAverage">-rating</option>
+        </select>
+    </div> -->
+    <div class="row mt-4 g-4">
+        <div class="col-md-2" *ngFor="let product of allProducts | search:searchText | paginate: { id: 'productPagination',
+        itemsPerPage: pageSize, currentPage: currentPage, totalItems: total }" [title]="product.title">
+            <div class="product p-2 small" hight="50">
+                <img [src]="product.imageCover" [alt]="product.title" [title]="product.title"
+                    class="w-100 cursor-pointer" [routerLink]="['/details', product._id]" />
+                <h3 class=" text-main h6">{{product.category.name}}</h3>
+                <h4 class="h6">{{product.title | splitText:2}}
+                    <span *ngIf="product.title.split(' ').length>2">...</span>
+                </h4>
+                <div class="d-flex justify-content-between">
+                    <span>{{product.price | price:' EGP'}}</span>
+                    <div>
+                        <i class="fa fa-star rating-color"></i>
+                        <span class="text-muted">{{product.ratingsAverage}}</span>
+                    </div>
+                </div>
+                <button (click)="addCart(product._id,btnAdd)" #btnAdd class="btn-main w-100">Add to Cart</button>
+            </div>
+        </div>
+    </div>
+<!-- ngx pagination -->
+    <div class="mt-4 d-flex justify-content-center">
+        <pagination-controls id="productPagination" (pageChange)="pageChanged($event)"
+            (pageBoundsCorrection)="pageChanged($event)" [maxSize]="9" [directionLinks]="true" [autoHide]="true"
+            [responsive]="true" previousLabel="Previous" nextLabel="Next" screenReaderPaginationLabel="Pagination"
+            screenReaderPageLabel="page" screenReaderCurrentLabel="You're on page">
+        </pagination-controls>
+    </div>
+</section>

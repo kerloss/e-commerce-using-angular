@@ -1,0 +1,36 @@
+<section class="bg-main-light p-4 rounded-3 my-3 shadow-lg w-50 mx-auto">
+    <form [formGroup]="payment" (ngSubmit)="userInfo()">
+        <div>
+            <div>
+                <label for="details">Home Details: </label>
+                <textarea id="details" class="form-control" formControlName="details"></textarea>
+                <div class="alert alert-danger my-2 w-50 text-center mx-auto"
+                    *ngIf="payment.get('details')?.errors && (payment.get('details')?.touched || payment.get('details')?.value.length > 0)">
+                    <!-- if found any errors show alert and if touched or value less than 0 show alert -->
+                    <p *ngIf="payment.get('details')?.getError('required')">details is required</p>
+                </div>
+            </div>
+            <div>
+                <label for="phone">Phone: </label>
+                <input type="tel" name="phone" id="phone" class="form-control" formControlName="phone">
+                <div class="alert alert-danger my-2 w-50 text-center mx-auto"
+                    *ngIf="payment.get('phone')?.errors && (payment.get('phone')?.touched || payment.get('phone')?.value.length > 0)">
+                    <!-- if found any errors show alert and if touched or value less than 0 show alert -->
+                    <p *ngIf="payment.get('phone')?.getError('required')">Phone number is required</p>
+                    <p *ngIf="payment.get('phone')?.getError('pattern')">Accept only Egypt phone numbers (01*******75)
+                    </p>
+                </div>
+            </div>
+            <div>
+                <label for="city">City: </label>
+                <input type="text" name="city" id="city" class="form-control" formControlName="city">
+                <div class="alert alert-danger my-2 w-50 text-center mx-auto"
+                    *ngIf="payment.get('city')?.errors && (payment.get('city')?.touched || payment.get('city')?.value.length > 0)">
+                    <!-- if found any errors show alert and if touched or value less than 0 show alert -->
+                    <p *ngIf="payment.get('city')?.getError('required')">City is required</p>
+                </div>
+            </div>
+            <button [disabled]="payment.invalid" class="btn-main mt-3">Checkout</button>
+        </div>
+    </form>
+</section>

@@ -1,0 +1,22 @@
+:host {
+    display: flex;
+    flex-direction: column;
+    /* justify-content: space-between; */
+    /* aw mmkn nro7 lfooter css w3mlo margin top auto*/
+    min-height: 100vh;
+}
+
+.container {
+    padding-top: 80px;
+}
+
+.btn-up{
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+    border-color: var(--main-color);
+    position: fixed;
+    bottom: 10px;
+    right: 10px;
+    z-index: 10;
+}

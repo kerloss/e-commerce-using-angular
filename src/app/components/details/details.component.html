@@ -1,0 +1,33 @@
+<section class="mt-5">
+    <div class="row mt-5">
+        <div class="col-md-4">
+            <owl-carousel-o [options]="detailsSliderOptions">
+                <ng-container *ngFor="let src of productDetails.images">
+                    <ng-template carouselSlide>
+                        <div class="text-center">
+                            <img [src]="src" [alt]="productDetails.title" [title]="productDetails.title" class="w-100">
+                        </div>
+                    </ng-template>
+                </ng-container>
+            </owl-carousel-o>
+        </div>
+        <div class="col-md-8">
+            <div class="mt-5">
+                <h3 class="h5">{{productDetails.title}}</h3><br />
+                <p class="text-muted">{{productDetails.description}}</p>
+                <h4 class="h6">{{productDetails.category.name}}</h4>
+                <h4 class="h6">Brand: <span class="text-main">{{productDetails.brand.name}}</span></h4>
+                <h4 class="h6">Quantity: <span class="text-main">{{productDetails.quantity}}</span></h4>
+                <h4 class="h6">Sold: <span class="text-main">{{productDetails.sold}}</span></h4>
+                <div class="d-flex justify-content-between">
+                    <span class="text-main">{{productDetails.price|currency:'EGP '}}</span>
+                    <div>
+                        <i class="fa fa-star rating-color"></i>
+                        <span class="text-muted">{{productDetails.ratingsAverage}}</span>
+                    </div>
+                </div>
+                <button (click)="addCart(productDetails._id, btnAdd)" #btnAdd class="btn-main w-100 my-3">Add to Cart</button>
+            </div>
+        </div>
+    </div>
+</section>

@@ -1,0 +1,38 @@
+<section class="bg-img-auth d-flex justify-content-center align-items-center">
+    <div class="blur p-4 rounded my-5 w-50 text-white">
+        <h2>Login Now :</h2>
+        <form [formGroup]="loginForm" (ngSubmit)="submitLogin()">
+            <div class="mb-2">
+                <label for="email">Email: </label>
+                <input formControlName="email" type="email" name="email" id="email" class="form-control">
+                <div class="alert alert-danger my-2 w-50 text-center mx-auto"
+                    *ngIf="loginForm.get('email')?.errors && (loginForm.get('email')?.touched || loginForm.get('email')?.value.length > 0)">
+                    <!-- if found any errors show alert and if touched or value less than 0 show alert -->
+                    <p *ngIf="loginForm.get('email')?.getError('required')">Email is Required</p>
+                    <p *ngIf="loginForm.get('email')?.getError('email')">Email InValid Format (example@example.com)</p>
+                </div>
+            </div>
+            <div class="mb-2">
+                <label for="password">Password: </label>
+                <input formControlName="password" type="password" name="password" id="password" class="form-control">
+                <div class="alert alert-danger my-2 w-50 text-center mx-auto"
+                    *ngIf="loginForm.get('password')?.errors && (loginForm.get('password')?.touched || loginForm.get('password')?.value.length > 0)">
+                    <!-- if found any errors show alert and if touched or value less than 0 show alert -->
+                    <p *ngIf="loginForm.get('password')?.getError('required')">Password is Required</p>
+                    <p *ngIf="loginForm.get('password')?.getError('pattern')">password must start with capital letter
+                        and at least 6 character or number</p>
+                </div>
+            </div>
+            <a class="text-info d-block ms-auto w-25" routerLink="/forget" routerLinkActive="active-link">Forget Password</a>
+
+            <button [disabled]="loginForm.invalid" class="btn-main border-0 mt-3 ms-auto d-block">
+                <span *ngIf="isLoading" class="loader me-2"></span>Login
+            </button>
+
+            <div *ngIf="msgError" class="alert alert-danger my-2 w-50 text-center mx-auto">
+                <span>{{msgError}}</span>
+            </div>
+
+        </form>
+    </div>
+</section>
